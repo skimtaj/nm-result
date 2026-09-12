@@ -10,6 +10,9 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+const cluster = require("cluster");
+const os = require("os");
+
 app.use(cookieParser())
 
 app.use(session({
@@ -30,21 +33,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 // app.set("views", path.join(__dirname, "adminModule", "Views"));
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.json());
-
-
-
-/*app.use((req, res) => {
-
-  if (req.originalUrl.startsWith('/nababiamission/reuslts/class-test-result')) {
-    return res.status(404).render('404_page')
-  }
-
-
-  return res.status(404).send('404 - Page Not Found');
-
-}) */
 
 
 app.use('', require('./teacherModule/routes/teacher_routes'))
@@ -52,13 +41,43 @@ app.use('', require('./teacherModule/routes/teacher_routes'))
 app.use('', require('./adminModule/routes/admin_routes'));
 
 
-const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+const numCPUs = os.cpus().length;
 
-  console.log('Server is connected');
+if (cluster.isPrimary) {
 
-});
+  console.log(`Master ${process.pid}`);
+
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on("exit", (worker) => {
+
+    console.log(`Worker ${worker.process.pid} died`);
+
+    // Restart the worker
+    cluster.fork();
+
+  });
+
+} else {
+
+  const PORT = process.env.PORT || 3000;
+
+  app.listen(PORT, () => {
+
+    console.log(`Worker ${process.pid} - Server is connected on port ${PORT}`);
+
+  });
+
+}
+
+
+
+
+
+
 
 
 
