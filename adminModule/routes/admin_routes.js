@@ -1,10 +1,43 @@
 const express = require('express');
 const route = express.Router();
 const auth = require('../../authentification/admin_auth');
-const ratelimit = require('../../ratelimit/user_rate_limit')
+const ratelimit = require('../../ratelimit/user_rate_limit');
+const multer = require('multer');
+const path = require('path')
 
-const { downloadStudentResultXIIG, downloadStudentResultXIIB, downloadStudentResultXIG, downloadStudentResultXIB, downloadStudentResultXG, downloadStudentResultXB, downloadStudentResultIXG, downloadStudentResultIXB, downloadStudentResultVIIIG, downloadStudentResultVIIIB, downloadStudentResultVIIG, downloadStudentResultVIIB, downloadStudentResultVIG, downloadStudentResultVIB, downloadStudentResultVB, downloadStudentResultVG, downloadStudentResultIVG, downloadStudentResultIVB, downloadStudentResultIII, downloadStudentResultII, downloadStudentResultI, downloadStudentResultNursery, resetPasswordPost, resetPassword, forgetPassword, adminLogout, adminSignup, adminSignupPost, adminLoginPost, adminCredential, deleteFeedback, guardianFeedbackList, guardianFeedback, downloadResult, resultCheckingPost, studentResult, deleteResult, resultChecking, editResultPost, editResult, viewResult, addResultPost, addClassPost, addClass, addResult, adminDashboard } = require('../../adminModule/controllers/admin_controllers')
 
+
+route.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+const storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../../uploads'));
+    },
+
+    filename: function (req, file, cb) {
+
+        const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1E9);
+
+        const fileExtension =
+            path.extname(file.originalname);
+
+        cb(
+            null,
+            file.fieldname + '-' + uniqueSuffix + fileExtension
+        );
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 10 * 1024 * 1024
+    }
+});
+
+
+const { deleteOnlineAdmissionCandidate, onlineAdmissionData, downloadForm, downloadAdmissionForm, onlineAdmissionFormPost, onlineAdmissionForm, downloadStudentResultXIIG, downloadStudentResultXIIB, downloadStudentResultXIG, downloadStudentResultXIB, downloadStudentResultXG, downloadStudentResultXB, downloadStudentResultIXG, downloadStudentResultIXB, downloadStudentResultVIIIG, downloadStudentResultVIIIB, downloadStudentResultVIIG, downloadStudentResultVIIB, downloadStudentResultVIG, downloadStudentResultVIB, downloadStudentResultVB, downloadStudentResultVG, downloadStudentResultIVG, downloadStudentResultIVB, downloadStudentResultIII, downloadStudentResultII, downloadStudentResultI, downloadStudentResultNursery, resetPasswordPost, resetPassword, forgetPassword, adminLogout, adminSignup, adminSignupPost, adminLoginPost, adminCredential, deleteFeedback, guardianFeedbackList, guardianFeedback, downloadResult, resultCheckingPost, studentResult, deleteResult, resultChecking, editResultPost, editResult, viewResult, addResultPost, addClassPost, addClass, addResult, adminDashboard } = require('../../adminModule/controllers/admin_controllers')
 
 route.get('/nababiamission/admin-dashboard', auth, adminDashboard);
 
@@ -45,7 +78,7 @@ route.post('/nababiamission/admin-login', adminLoginPost);
 
 route.get('/nababiamission/admin-signup/SSSSS', adminSignup);
 
-route.post('/nababiamission/admin-signup', adminSignupPost);
+route.post('/nababiamission/admin-signup/SSSSS', adminSignupPost);
 
 route.get('/logout', adminLogout);
 
@@ -92,6 +125,20 @@ route.get('/nababiamission/admin-dashboard/download-student-result/XII-B', auth,
 route.get('/nababiamission/admin-dashboard/download-student-result/XII-G', auth, downloadStudentResultXIIG);
 
 
+
+
+
+route.get('/nm/online-admission-form-2027', onlineAdmissionForm)
+
+route.post('/nm/online-admission-form-2027', upload.single('student_photo'), onlineAdmissionFormPost)
+
+route.get('/nm/student-admission/:studentid', downloadAdmissionForm)
+
+route.get('/download-admission-form/:studentid', downloadForm);
+
+route.get('/nababiamission/admin-dashboard/online-admission', auth, onlineAdmissionData);
+
+route.get('/delete-online-admission-candidate/:cadidateid', deleteOnlineAdmissionCandidate)
 
 
 module.exports = route; 

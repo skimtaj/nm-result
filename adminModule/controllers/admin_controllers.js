@@ -9,6 +9,12 @@ const exceljs = require('exceljs');
 const bcryptjs = require('bcryptjs')
 const guardian_feedback_model = require("../models/guardian_feedback_model");
 const admin_signup_model = require("../models/admin_signup_model");
+const student_admission_model = require('../models/student_admission_model');
+
+
+
+
+
 
 
 
@@ -5483,8 +5489,266 @@ const resetPasswordPost = async (req, res) => {
 
 }
 
+const onlineAdmissionForm = (req, res) => {
+
+    res.render('../adminModule/Views/online_admission_form')
+}
+
+const onlineAdmissionFormPost = async (req, res) => {
+
+    try {
+
+        const onlineAdmissionData = req.body;
+
+        console.log(onlineAdmissionData)
+
+        if (req.file) {
+            onlineAdmissionData.student_photo = req.file.filename;
+        }
+
+        const formNoGenerate = async () => {
+            const totalOnlineAdmissionDoc = await student_admission_model.countDocuments();
+            const incrementDoc = String(totalOnlineAdmissionDoc + 1).padStart(5, '0');
+            return `Z-${incrementDoc}`
+        };
+
+        onlineAdmissionData.form_no = await formNoGenerate();
 
 
+        const new_student_admission_model = student_admission_model(onlineAdmissionData);
+        await new_student_admission_model.save();
+
+        console.log(new_student_admission_model)
+
+        req.flash('success', 'Form submitted successfully');
+        return res.redirect(`/nm/student-admission/${new_student_admission_model._id}`)
+
+    }
+
+    catch (err) {
+
+        console.log('online admission form submitting error', err);
+        req.flash('error', 'Something is wrong');
+        return res.redirect('/nm/online-admission-form-2027')
+    }
+
+}
+
+const downloadAdmissionForm = async (req, res) => {
+
+    const studentSourse = await student_admission_model.findById(req.params.studentid)
+
+    res.render('../adminModule/Views/admission_form_download', { studentSourse })
+}
+
+const downloadForm = async (req, res) => {
+    try {
+
+        const studentSourse = await student_admission_model.findById(
+            req.params.studentid
+        );
+
+        // Student not found
+        if (!studentSourse) {
+            req.flash('error', 'Student admission record not found');
+            return res.redirect('/nm/student-admission');
+        }
 
 
-module.exports = { downloadStudentResultXIIG, downloadStudentResultXIIB, downloadStudentResultXIG, downloadStudentResultXIB, downloadStudentResultXG, downloadStudentResultXB, downloadStudentResultIXG, downloadStudentResultIXB, downloadStudentResultVIIIG, downloadStudentResultVIIIB, downloadStudentResultVIIG, downloadStudentResultVIIB, downloadStudentResultVIG, downloadStudentResultVIB, downloadStudentResultVG, downloadStudentResultVB, downloadStudentResultIVG, downloadStudentResultIVB, downloadStudentResultIII, downloadStudentResultII, downloadStudentResultI, downloadStudentResultNursery, resetPasswordPost, adminSignup, resetPassword, forgetPassword, adminLogout, adminLoginPost, adminSignupPost, adminCredential, deleteFeedback, guardianFeedbackList, guardianFeedback, downloadResult, resultCheckingPost, studentResult, deleteResult, resultChecking, editResultPost, editResult, viewResult, addResultPost, addClassPost, addClass, addResult, adminDashboard }
+        // --------------------------------------------------
+        // LOAD PDF TEMPLATE
+        // --------------------------------------------------
+
+        const inputPdfPath = path.join(
+            __dirname,
+            '../../nm-result/student admission form (8) (1).pdf'
+        );
+
+        const existingPdfBytes = await fs.readFile(inputPdfPath);
+
+        const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+        const form = pdfDoc.getForm();
+
+
+        // --------------------------------------------------
+        // FILL PDF FORM FIELDS
+        // --------------------------------------------------
+
+        form.getTextField('student_name').setText(
+            studentSourse.student_name || ''
+        );
+
+        form.getTextField('dob').setText(
+            studentSourse.dob || ''
+        );
+
+        form.getTextField('gender').setText(
+            studentSourse.gender || ''
+        );
+
+        form.getTextField('student_adhaar_no').setText(
+            studentSourse.student_adhaar_no || ''
+        );
+
+        form.getTextField('father_name').setText(
+            studentSourse.father_name || ''
+        );
+
+        form.getTextField('father_adhaar_no').setText(
+            studentSourse.father_adhaar_no || ''
+        );
+
+        form.getTextField('occupation').setText(
+            studentSourse.occupation || ''
+        );
+
+        form.getTextField('relation_with_student').setText(
+            studentSourse.relation_with_student || ''
+        );
+
+        form.getTextField('mobile_no').setText(
+            studentSourse.mobile_no || ''
+        );
+
+        form.getTextField('mother_name').setText(
+            studentSourse.mother_name || ''
+        );
+
+        form.getTextField('total_family_member').setText(
+            studentSourse.total_family_member?.toString() || ''
+        );
+
+        form.getTextField('family_monthly_income').setText(
+            studentSourse.family_monthly_income?.toString() || ''
+        );
+
+        form.getTextField('present_school_details').setText(
+            studentSourse.present_school_details || ''
+        );
+
+        form.getTextField('present_class').setText(
+            studentSourse.present_class || ''
+        );
+
+        form.getTextField('appling_for_class').setText(
+            studentSourse.appling_for_class || ''
+        );
+
+        form.getTextField('full_address').setText(
+            studentSourse.full_address || ''
+        );
+
+        form.getTextField('appling_date').setText(
+            studentSourse.appling_date || ''
+        );
+
+        form.getTextField('residential_status').setText(
+            studentSourse.residential_status || ''
+        );
+
+        form.getTextField('form_no').setText(
+            studentSourse.form_no || ''
+        );
+
+
+        const firstPage = pdfDoc.getPage(0);
+
+        if (studentSourse.student_photo) {
+
+            const imagePath = path.join(
+                __dirname,
+                '../../uploads',
+                studentSourse.student_photo
+            );
+
+            const imageBytes = await fs.readFile(imagePath);
+
+            const fileExtension = path
+                .extname(studentSourse.student_photo)
+                .toLowerCase();
+
+            let image;
+
+            if (
+                fileExtension === '.jpg' ||
+                fileExtension === '.jpeg'
+            ) {
+                image = await pdfDoc.embedJpg(imageBytes);
+            }
+
+            else if (fileExtension === '.png') {
+                image = await pdfDoc.embedPng(imageBytes);
+            }
+
+            if (image) {
+                firstPage.drawImage(image, {
+                    x: 506,
+                    y: 690,
+                    width: 75,
+                    height: 110
+                });
+
+            }
+
+            if (image) {
+                firstPage.drawImage(image, {
+                    x: 497,
+                    y: 135,
+                    width: 70,
+                    height: 90
+                });
+
+            }
+
+        }
+
+        const pdfBytes = await pdfDoc.save();
+
+        res.setHeader(
+            'Content-Type',
+            'application/pdf'
+        );
+
+        res.setHeader(
+            'Content-Disposition',
+            'attachment; filename="Student_Admission_Form.pdf"'
+        );
+
+        return res.end(pdfBytes);
+
+
+    } catch (err) {
+
+        console.log(
+            'Admission form download error:',
+            err
+        );
+
+        req.flash(
+            'error',
+            'Something is wrong while generating the admission form'
+        );
+
+        return res.redirect(
+            `/nm/student-admission/${req.params.studentid}`
+        );
+    }
+};
+
+
+const onlineAdmissionData = async (req, res) => {
+
+    const allOnlineAdmissionDocuments = await student_admission_model.find();
+
+    res.render('../adminModule/Views/online_admission', { allOnlineAdmissionDocuments })
+}
+
+const deleteOnlineAdmissionCandidate = async (req, res) => {
+
+    await student_admission_model.findByIdAndDelete(req.params.cadidateid);
+    req.flash('success', 'Candidate deleted successfully');
+    return res.redirect('/nababiamission/admin-dashboard/online-admission')
+}
+
+module.exports = { deleteOnlineAdmissionCandidate, onlineAdmissionData, downloadForm, downloadAdmissionForm, onlineAdmissionFormPost, onlineAdmissionForm, downloadStudentResultXIIG, downloadStudentResultXIIB, downloadStudentResultXIG, downloadStudentResultXIB, downloadStudentResultXG, downloadStudentResultXB, downloadStudentResultIXG, downloadStudentResultIXB, downloadStudentResultVIIIG, downloadStudentResultVIIIB, downloadStudentResultVIIG, downloadStudentResultVIIB, downloadStudentResultVIG, downloadStudentResultVIB, downloadStudentResultVG, downloadStudentResultVB, downloadStudentResultIVG, downloadStudentResultIVB, downloadStudentResultIII, downloadStudentResultII, downloadStudentResultI, downloadStudentResultNursery, resetPasswordPost, adminSignup, resetPassword, forgetPassword, adminLogout, adminLoginPost, adminSignupPost, adminCredential, deleteFeedback, guardianFeedbackList, guardianFeedback, downloadResult, resultCheckingPost, studentResult, deleteResult, resultChecking, editResultPost, editResult, viewResult, addResultPost, addClassPost, addClass, addResult, adminDashboard }
