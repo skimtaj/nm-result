@@ -5507,9 +5507,9 @@ const onlineAdmissionFormPost = async (req, res) => {
         }
 
         const formNoGenerate = async () => {
-            const totalOnlineAdmissionDoc = await student_admission_model.countDocuments();
-            const incrementDoc = String(totalOnlineAdmissionDoc + 1).padStart(5, '0');
-            return `Z-${incrementDoc}`
+            const formNo = 1050;
+            const incrementFormNo = formNo + 1
+            return `${incrementFormNo}`
         };
 
         onlineAdmissionData.form_no = await formNoGenerate();
@@ -5546,7 +5546,7 @@ const downloadForm = async (req, res) => {
             req.params.studentid
         );
 
-      
+
 
         const inputPdfPath = path.join(
             __dirname,
@@ -5560,7 +5560,7 @@ const downloadForm = async (req, res) => {
         const form = pdfDoc.getForm();
 
 
-       
+
 
         form.getTextField('student_name').setText(
             studentSourse.student_name || ''
