@@ -314,8 +314,9 @@
                                     <th>Form No</th>
                                     <th>Student Name</th>
                                     <th>Father Name</th>
+                                    <th>Address</th>
                                     <th>Mobile</th>
-                                    <th>Applying For Class</th>
+                                    <th>Applying For</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -334,6 +335,10 @@
                                         <td>
                                             <%= oa.father_name %>
                                         </td>
+
+                                        <td>
+                                            <%= oa.full_address %>
+                                        </td>
                                         <td>
                                             <%= oa.mobile_no %>
                                         </td>
@@ -345,9 +350,6 @@
                                                 onclick=" return confirm('Are You Sure?')" type="button"
                                                 class="btn btn-primary btn-sm">Delete</a>
 
-                                            <a href="/download-admission-form/<%=oa._id%>"
-                                                onclick=" return confirm('Are You Sure?')" type="button"
-                                                class="btn btn-primary btn-sm">Download</a>
 
                                         </td>
                                     </tr>
