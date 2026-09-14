@@ -5518,8 +5518,6 @@ const onlineAdmissionFormPost = async (req, res) => {
         const new_student_admission_model = student_admission_model(onlineAdmissionData);
         await new_student_admission_model.save();
 
-        console.log(new_student_admission_model)
-
         req.flash('success', 'Form submitted successfully');
         return res.redirect(`/nm/student-admission/${new_student_admission_model._id}`)
 
@@ -5548,16 +5546,7 @@ const downloadForm = async (req, res) => {
             req.params.studentid
         );
 
-        // Student not found
-        if (!studentSourse) {
-            req.flash('error', 'Student admission record not found');
-            return res.redirect('/nm/student-admission');
-        }
-
-
-        // --------------------------------------------------
-        // LOAD PDF TEMPLATE
-        // --------------------------------------------------
+      
 
         const inputPdfPath = path.join(
             __dirname,
@@ -5571,9 +5560,7 @@ const downloadForm = async (req, res) => {
         const form = pdfDoc.getForm();
 
 
-        // --------------------------------------------------
-        // FILL PDF FORM FIELDS
-        // --------------------------------------------------
+       
 
         form.getTextField('student_name').setText(
             studentSourse.student_name || ''

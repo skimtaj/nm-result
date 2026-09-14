@@ -127,8 +127,7 @@ route.get('/nababiamission/admin-dashboard/download-student-result/XII-G', auth,
 
 
 
-
-route.get('/nm/online-admission-form-2027', onlineAdmissionForm)
+route.get('/nm/online-admission-form-2027', ratelimit, onlineAdmissionForm)
 
 route.post('/nm/online-admission-form-2027', upload.single('student_photo'), onlineAdmissionFormPost)
 
@@ -138,7 +137,7 @@ route.get('/download-admission-form/:studentid', downloadForm);
 
 route.get('/nababiamission/admin-dashboard/online-admission', auth, onlineAdmissionData);
 
-route.get('/delete-online-admission-candidate/:cadidateid', deleteOnlineAdmissionCandidate)
+route.get('/delete-online-admission-candidate/:cadidateid', auth, deleteOnlineAdmissionCandidate)
 
 
 module.exports = route; 
