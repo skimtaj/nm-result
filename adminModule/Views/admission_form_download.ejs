@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
     rel="stylesheet">
@@ -143,8 +142,8 @@
       font-size: 0.95rem;
       color: var(--text-muted);
       margin-bottom: 2.2rem;
-      line-height: 1.6;
-      max-width: 440px;
+      line-height: 1.7;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -152,6 +151,30 @@
     .message strong {
       color: var(--text-dark);
       font-weight: 600;
+    }
+
+    /* Bengali note styling */
+    .message .bn-note {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.88rem;
+      color: #5a3b5c;
+      font-weight: 500;
+      background: #faf0fc;
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      border-left: 3px solid var(--primary-soft);
+      text-align: left;
+    }
+
+    .message .bn-note i {
+      font-style: normal;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .message .bn-note i:last-child {
+      margin-bottom: 0;
     }
 
     /* ----- BUTTON GROUP ----- */
@@ -318,12 +341,16 @@
         width: 14px;
         height: 14px;
       }
+
+      .message .bn-note {
+        font-size: 0.82rem;
+        padding: 0.5rem 0.8rem;
+      }
     }
   </style>
 </head>
 
 <body>
-
 
   <% if (messages.success) { %>
     <script>
@@ -350,9 +377,6 @@
     </script>
     <% } %>
 
-
-
-
       <% if (messages.error) { %>
         <script>
           Swal.fire({
@@ -364,7 +388,7 @@
             timer: 3000,
             timerProgressBar: true,
             background: "#ffffff",
-            iconColor: "#red",
+            iconColor: "#e74c3c",
             color: "#333",
             customClass: {
               popup: 'custom-swal-toast'
@@ -378,8 +402,6 @@
         </script>
         <% } %>
 
-
-
           <div class="thankyou-card">
             <div class="card-header-strip"></div>
             <div class="card-inner">
@@ -392,14 +414,16 @@
               </div>
 
               <h1>Thank You for Submitting!</h1>
+
+              <!-- Perfectly crafted message -->
               <p class="message">
                 Your admission form has been received successfully. You can now
                 <strong>download a copy of your submitted form</strong> for your records.
-                (ডাউনলোড করা ফর্মটির হার্ড কপি অবশ্যই পরীক্ষা দেওয়ার সময় অফিসে জমা দিতে হবে।)
-
-                বাকি নির্দেশিকাগুলি অ্যাডমিশন ফর্মে উল্লেখ করা আছে।
-
-
+                <span class="bn-note">
+                  <i>📄 ডাউনলোড করা ফর্মটির হার্ড কপি অবশ্যই পরীক্ষা দেওয়ার আগে অফিসে জমা দিতে হবে।</i>
+                  <i>📄 ফর্ম মূল্য ২৫০ টাকা</i>
+                  <i>📄 বাকি নির্দেশিকাগুলি অ্যাডমিশন ফর্মে উল্লেখ আছে।</i>
+                </span>
               </p>
 
               <!-- BUTTON GROUP -->
