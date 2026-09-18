@@ -7,6 +7,8 @@
     <title>Nababia Mission — Student Admission Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
         rel="stylesheet">
@@ -132,7 +134,7 @@
             margin-top: 0.15rem;
         }
 
-        /* ----- HEADER ROW WITH HELP BUTTONS ----- */
+        /* ----- HEADER ROW ----- */
         .header-row {
             display: flex;
             flex-wrap: wrap;
@@ -165,212 +167,6 @@
             padding-top: 0.35rem;
             padding-bottom: 0.35rem;
             border-radius: 0 8px 8px 0;
-        }
-
-        /* ----- HELP BUTTONS ----- */
-        .help-buttons {
-            display: flex;
-            gap: 0.6rem;
-            flex-shrink: 0;
-        }
-
-        .btn-help {
-            background: var(--bg-soft);
-            color: var(--primary);
-            border: 1.5px solid var(--border-light);
-            padding: 0.6rem 1.1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.82rem;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: 0.2px;
-            white-space: nowrap;
-        }
-
-        .btn-help:hover {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 14px -4px rgba(77, 8, 81, 0.3);
-        }
-
-        .btn-help:active {
-            transform: translateY(0);
-        }
-
-        /* ----- MODAL / POPUP ----- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(43, 15, 46, 0.55);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-box {
-            background: #ffffff;
-            border-radius: 22px;
-            width: 100%;
-            max-width: 620px;
-            max-height: 88vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-light);
-            transform: translateY(18px) scale(0.98);
-            transition: transform 0.25s ease;
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.2rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: #ffffff;
-        }
-
-        .modal-header h2 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: 0.2px;
-        }
-
-        .modal-close {
-            background: rgba(255, 255, 255, 0.18);
-            border: none;
-            color: #ffffff;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 1.15rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            line-height: 1;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.35);
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* ----- VIDEO WRAPPER ----- */
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px -8px rgba(77, 8, 81, 0.25);
-            background: #f0e6f2;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-note {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
-            line-height: 1.4;
-            background: var(--bg-soft);
-            padding: 0.7rem 1rem;
-            border-radius: 10px;
-            border-left: 3px solid var(--primary);
-            text-align: left;
-        }
-
-        /* ----- DOCUMENTS LIST ----- */
-        .modal-body ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .modal-body ul li {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            padding-left: 1.3rem;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        .modal-body ul li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0.55rem;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--primary);
-        }
-
-        .modal-body ul li strong {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .modal-footer {
-            padding: 1rem 1.5rem 1.3rem;
-            border-top: 1px solid var(--border-light);
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .btn-modal-close {
-            background: var(--primary);
-            color: #ffffff;
-            border: none;
-            padding: 0.7rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.88rem;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.15s ease;
-        }
-
-        .btn-modal-close:hover {
-            background: var(--primary-light);
-            transform: translateY(-1px);
         }
 
         /* ----- FORM GRID ----- */
@@ -704,23 +500,9 @@
                 font-size: 0.62rem;
             }
 
-            .btn-help {
-                font-size: 0.75rem;
-                padding: 0.5rem 0.85rem;
-            }
-
             .header-row {
                 flex-direction: column;
                 align-items: stretch;
-            }
-
-            .help-buttons {
-                justify-content: stretch;
-            }
-
-            .btn-help {
-                flex: 1;
-                text-align: center;
             }
         }
 
@@ -732,514 +514,447 @@
 
 <body>
 
-    <div class="admission-card">
-        <div class="card-header-strip"></div>
-        <div class="card-inner">
+    <!-- Server-side messages (keep as is) -->
+    <% if (messages.success) { %>
+        <script>
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "<%= messages.success %>",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: "#ffffff",
+                iconColor: "#00b894",
+                color: "#333",
+                customClass: { popup: 'custom-swal-toast' },
+                didOpen: (toast) => {
+                    toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                    toast.style.borderRadius = '8px';
+                    toast.style.padding = '0.75rem 1.25rem';
+                }
+            });
+        </script>
+        <% } %>
 
-            <!-- ===== BRAND HEADER WITH LOGO ===== -->
-            <div class="brand-bar">
-                <div class="brand-logo">
-                    <!-- Replace the src below with your actual Nababia Mission logo URL -->
-                    <img src="https://placehold.co/120x120/4D0851/FEF5FF?text=NM" alt="Nababia Mission Logo"
-                        onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=\'logo-fallback\'>NM</span>';">
-                </div>
-                <div class="brand-text">
-                    <span class="brand-name">Nababia Mission</span>
-                    <span class="brand-tagline">AN EDUCATIONAL & WELFARE TRUST</span>
-                </div>
-            </div>
+            <% if (messages.error) { %>
+                <script>
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "error",
+                        title: "<%= messages.error %>",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: "#ffffff",
+                        iconColor: "#e74c3c",
+                        color: "#333",
+                        customClass: { popup: 'custom-swal-toast' },
+                        didOpen: (toast) => {
+                            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                            toast.style.borderRadius = '8px';
+                            toast.style.padding = '0.75rem 1.25rem';
+                        }
+                    });
+                </script>
+                <% } %>
 
-            <!-- HEADER WITH HELP BUTTONS -->
-            <div class="header-row">
-                <div class="header-text">
-                    <h1>Student Admission Form</h1>
-                    <div class="subhead">
-                        Please fill in all fields accurately. Fields marked with * are mandatory.
-                    </div>
-                </div>
-                <div class="help-buttons">
-                    <button type="button" class="btn-help" onclick="openModal('instructionsModal')">How to Fill</button>
-                    <button type="button" class="btn-help" onclick="openModal('documentsModal')">Documents</button>
-                </div>
-            </div>
+                    <div class="admission-card">
+                        <div class="card-header-strip"></div>
+                        <div class="card-inner">
 
-            <!-- ADMISSION FORM -->
-            <form id="admissionForm" method="post" action="/nm/online-admission-form-2027" enctype="multipart/form-data">
-                <div class="form-grid">
+                            <!-- ===== BRAND HEADER WITH LOGO ===== -->
+                            <div class="brand-bar">
+                                <div class="brand-logo">
+                                    <img src="https://placehold.co/120x120/4D0851/FEF5FF?text=NM"
+                                        alt="Nababia Mission Logo"
+                                        onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=\'logo-fallback\'>NM</span>';">
+                                </div>
+                                <div class="brand-text">
+                                    <span class="brand-name">Nababia Mission</span>
+                                    <span class="brand-tagline">AN EDUCATIONAL &amp; WELFARE TRUST</span>
+                                </div>
+                            </div>
 
-                    <!-- ===== STUDENT DETAILS ===== -->
-                    <div class="section-title">Student Information</div>
+                            <!-- HEADER (no buttons) -->
+                            <div class="header-row">
+                                <div class="header-text">
+                                    <h1>Student Admission Form</h1>
+                                    <div class="subhead">
+                                        Please fill in all fields accurately. Fields marked with * are mandatory.
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="form-group full-width">
-                        <label for="student_name">Full Name *</label>
-                        <input type="text" id="student_name" name="student_name" placeholder="As per Aadhaar"
-                            autocomplete="name" required>
-                    </div>
+                            <!-- ADMISSION FORM -->
+                            <form id="admissionForm" method="post" action="/apply-online" enctype="multipart/form-data">
+                                <div class="form-grid">
 
-                    <div class="form-group">
-                        <label for="dob">Date of Birth *</label>
-                        <input type="date" id="dob" name="dob" required>
-                    </div>
+                                    <!-- ===== STUDENT DETAILS ===== -->
+                                    <div class="section-title">Student Information</div>
 
-                    <div class="form-group">
-                        <label for="gender">Gender *</label>
-                        <select id="gender" name="gender" required>
-                            <option value="" disabled selected>Select gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="student_name">Full Name *</label>
+                                        <input type="text" id="student_name" name="student_name"
+                                            placeholder="As per Aadhaar" autocomplete="name" required>
+                                    </div>
 
-                    <div class="form-group">
-                        <label for="student_adhaar_no">Student Aadhaar Number *</label>
-                        <input type="text" id="student_adhaar_no" name="student_adhaar_no" placeholder="12-digit number"
-                            pattern="[0-9]{12}" title="Please enter a valid 12-digit Aadhaar number" required>
-                    </div>
+                                    <div class="form-group">
+                                        <label for="dob">Date of Birth *</label>
+                                        <input type="date" id="dob" name="dob" required>
+                                    </div>
 
-                    <!-- ===== NEW: RECENT COLOR PHOTO UPLOAD ===== -->
-                    <div class="section-title">Recent Color Photo</div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender *</label>
+                                        <select id="gender" name="gender" required>
+                                            <option value="" disabled selected>Select gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
 
-                    <div class="form-group full-width" id="photoUploadGroup">
-                        <label for="student_photo">Recent Color Photo *</label>
-                        <input type="file" id="student_photo" name="student_photo" accept="image/jpeg, image/png, image/jpg" required>
-                        <span class="file-hint">Maximum file size: 500 KB. Accepted formats: JPG, JPEG, PNG.</span>
-                        <div class="file-preview" id="photoPreview">
-                            <img src="" alt="Photo preview" id="photoPreviewImg">
+                                    <div class="form-group">
+                                        <label for="student_adhaar_no">Student Aadhaar Number *</label>
+                                        <input type="text" id="student_adhaar_no" name="student_adhaar_no"
+                                            placeholder="12-digit number" pattern="[0-9]{12}"
+                                            title="Please enter a valid 12-digit Aadhaar number" required>
+                                    </div>
+
+                                    <!-- ===== RECENT COLOR PHOTO ===== -->
+                                    <div class="section-title">Recent Color Photo</div>
+
+                                    <div class="form-group full-width" id="photoUploadGroup">
+                                        <label for="student_photo">Recent Color Photo *</label>
+                                        <input type="file" id="student_photo" name="student_photo"
+                                            accept="image/jpeg, image/png, image/jpg" required>
+                                        <span class="file-hint">Maximum file size: 500 KB. Accepted formats: JPG, JPEG,
+                                            PNG.</span>
+                                        <div class="file-preview" id="photoPreview">
+                                            <img src="" alt="Photo preview" id="photoPreviewImg">
+                                        </div>
+                                        <span class="error-message" id="photoError"></span>
+                                    </div>
+
+                                    <!-- ===== PARENT / GUARDIAN ===== -->
+                                    <div class="section-title">Parent / Guardian Details</div>
+
+                                    <div class="form-group">
+                                        <label for="father_name">Father's Full Name *</label>
+                                        <input type="text" id="father_name" name="father_name" placeholder="Full name"
+                                            required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mother_name">Mother's Full Name *</label>
+                                        <input type="text" id="mother_name" name="mother_name" placeholder="Full name"
+                                            required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="father_adhaar_no">Father's Aadhaar Number *</label>
+                                        <input type="text" id="father_adhaar_no" name="father_adhaar_no"
+                                            placeholder="12-digit number" pattern="[0-9]{12}"
+                                            title="Please enter a valid 12-digit Aadhaar number" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="occupation">Occupation *</label>
+                                        <select id="occupation" name="occupation" required>
+                                            <option value="" disabled selected>Select occupation</option>
+                                            <option value="Farmer">Farmer</option>
+                                            <option value="Teacher">Teacher</option>
+                                            <option value="Doctor">Doctor</option>
+                                            <option value="Engineer">Engineer</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Government Employee">Government Employee</option>
+                                            <option value="Private Employee">Private Employee</option>
+                                            <option value="Daily Wage Worker">Daily Wage Worker</option>
+                                            <option value="Homemaker">Homemaker</option>
+                                            <option value="Retired">Retired</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="relation_with_student">Relation with Student *</label>
+                                        <select id="relation_with_student" name="relation_with_student" required>
+                                            <option value="" disabled selected>Select relation</option>
+                                            <option value="Father">Father</option>
+                                            <option value="Mother">Mother</option>
+                                            <option value="Guardian">Guardian</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mobile_no">Mobile Number *</label>
+                                        <input type="tel" id="mobile_no" name="mobile_no" placeholder="10-digit mobile"
+                                            pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number"
+                                            required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="total_family_member">Total Family Members *</label>
+                                        <input type="text" id="total_family_member" name="total_family_member"
+                                            placeholder="e.g. 5" required>
+                                    </div>
+
+                                    <!-- ===== MONTHLY FAMILY INCOME — SIMPLE NUMBER INPUT ===== -->
+                                    <div class="form-group">
+                                        <label for="family_monthly_income">Monthly Family Income (₹) *</label>
+                                        <input type="number" id="family_monthly_income" name="family_monthly_income"
+                                            placeholder="e.g. 25000" min="0" step="1000" required>
+                                    </div>
+
+                                    <!-- ===== SCHOOL & ADDRESS ===== -->
+                                    <div class="section-title">School &amp; Address Details</div>
+
+                                    <div class="form-group span-2">
+                                        <label for="present_school_details">Present School Details *</label>
+                                        <input type="text" id="present_school_details" name="present_school_details"
+                                            placeholder="School name" required>
+                                    </div>
+
+                                    <div class="form-group" id="presentClassGroup">
+                                        <label for="present_class">Present Class *</label>
+                                        <select id="present_class" name="present_class" required>
+                                            <option value="" disabled selected>Select class</option>
+                                            <option value="Nursery">Nursery</option>
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VII">VII</option>
+                                            <option value="VIII">VIII</option>
+                                            <option value="IX">IX</option>
+                                        </select>
+                                        <span class="error-message" id="presentClassError"></span>
+                                    </div>
+
+                                    <div class="form-group" id="applyingClassGroup">
+                                        <label for="appling_for_class">Applying for Class *</label>
+                                        <select id="appling_for_class" name="appling_for_class" required>
+                                            <option value="" disabled selected>Select class</option>
+                                            <option value="Nursery">Nursery</option>
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option>
+                                            <option value="VI">VI</option>
+                                            <option value="VII">VII</option>
+                                            <option value="VIII">VIII</option>
+                                            <option value="IX">IX</option>
+                                        </select>
+                                        <span class="error-message" id="applyingClassError"></span>
+                                    </div>
+
+                                    <div class="form-group full-width">
+                                        <label for="full_address">Full Address *</label>
+                                        <textarea id="full_address" name="full_address" placeholder="Enter full address"
+                                            required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="appling_date">Applying Date *</label>
+                                        <input type="date" id="appling_date" name="appling_date" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="residential_status">Residential Status *</label>
+                                        <select id="residential_status" name="residential_status" required>
+                                            <option value="" disabled selected>Select status</option>
+                                            <option value="Residential">Residential</option>
+                                            <option value="Non-Residential">Non-Residential</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- ===== SUBMIT ===== -->
+                                    <div class="submit-area">
+                                        <button type="submit" class="btn-submit">Submit Application</button>
+                                    </div>
+
+                                </div>
+                            </form>
+
                         </div>
-                        <span class="error-message" id="photoError"></span>
                     </div>
 
-                    <!-- ===== PARENT / GUARDIAN ===== -->
-                    <div class="section-title">Parent / Guardian Details</div>
+                    <script>
+                        // ----- FORM SETUP -----
+                        window.addEventListener('load', function () {
+                            const today = new Date().toISOString().split('T')[0];
+                            const dobInput = document.getElementById('dob');
+                            const applingDate = document.getElementById('appling_date');
 
-                    <div class="form-group">
-                        <label for="father_name">Father's Full Name *</label>
-                        <input type="text" id="father_name" name="father_name" placeholder="Full name" required>
-                    </div>
+                            if (dobInput) {
+                                dobInput.max = today;
+                            }
 
-                    <div class="form-group">
-                        <label for="mother_name">Mother's Full Name *</label>
-                        <input type="text" id="mother_name" name="mother_name" placeholder="Full name" required>
-                    </div>
+                            if (applingDate && !applingDate.value) {
+                                applingDate.value = today;
+                            }
+                        });
 
-                    <div class="form-group">
-                        <label for="father_adhaar_no">Father's Aadhaar Number *</label>
-                        <input type="text" id="father_adhaar_no" name="father_adhaar_no" placeholder="12-digit number"
-                            pattern="[0-9]{12}" title="Please enter a valid 12-digit Aadhaar number" required>
-                    </div>
+                        // ----- CLASS VALIDATION LOGIC -----
+                        (function () {
+                            const classOrder = [
+                                'Nursery', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'
+                            ];
 
-                    <div class="form-group">
-                        <label for="occupation">Occupation *</label>
-                        <select id="occupation" name="occupation" required>
-                            <option value="" disabled selected>Select occupation</option>
-                            <option value="Farmer">Farmer</option>
-                            <option value="Teacher">Teacher</option>
-                            <option value="Doctor">Doctor</option>
-                            <option value="Engineer">Engineer</option>
-                            <option value="Business">Business</option>
-                            <option value="Government Employee">Government Employee</option>
-                            <option value="Private Employee">Private Employee</option>
-                            <option value="Daily Wage Worker">Daily Wage Worker</option>
-                            <option value="Homemaker">Homemaker</option>
-                            <option value="Retired">Retired</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+                            const presentSelect = document.getElementById('present_class');
+                            const applyingSelect = document.getElementById('appling_for_class');
+                            const presentGroup = document.getElementById('presentClassGroup');
+                            const applyingGroup = document.getElementById('applyingClassGroup');
+                            const presentError = document.getElementById('presentClassError');
+                            const applyingError = document.getElementById('applyingClassError');
 
-                    <div class="form-group">
-                        <label for="relation_with_student">Relation with Student *</label>
-                        <select id="relation_with_student" name="relation_with_student" required>
-                            <option value="" disabled selected>Select relation</option>
-                            <option value="Father">Father</option>
-                            <option value="Mother">Mother</option>
-                            <option value="Guardian">Guardian</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
+                            function getClassIndex(val) {
+                                return classOrder.indexOf(val);
+                            }
 
-                    <div class="form-group">
-                        <label for="mobile_no">Mobile Number *</label>
-                        <input type="tel" id="mobile_no" name="mobile_no" placeholder="10-digit mobile"
-                            pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required>
-                    </div>
+                            function validateClasses() {
+                                const presentVal = presentSelect.value;
+                                const applyingVal = applyingSelect.value;
 
-                    <div class="form-group">
-                        <label for="total_family_member">Total Family Members *</label>
-                        <input type="text" id="total_family_member" name="total_family_member" placeholder="e.g. 5"
-                            required>
-                    </div>
+                                presentGroup.classList.remove('error');
+                                applyingGroup.classList.remove('error');
+                                presentError.textContent = '';
+                                applyingError.textContent = '';
 
-                    <div class="form-group">
-                        <label for="family_monthly_income">Monthly Family Income (₹) *</label>
-                        <input type="number" id="family_monthly_income" name="family_monthly_income"
-                            placeholder="e.g. 25000" min="0" step="1000" required>
-                    </div>
+                                if (!presentVal || !applyingVal) {
+                                    return;
+                                }
 
-                    <!-- ===== SCHOOL & ADDRESS ===== -->
-                    <div class="section-title">School &amp; Address Details</div>
+                                const presentIdx = getClassIndex(presentVal);
+                                const applyingIdx = getClassIndex(applyingVal);
 
-                    <div class="form-group span-2">
-                        <label for="present_school_details">Present School Details *</label>
-                        <input type="text" id="present_school_details" name="present_school_details"
-                            placeholder="School name" required>
-                    </div>
+                                if (presentIdx === -1 || applyingIdx === -1) {
+                                    return;
+                                }
 
-                    <div class="form-group" id="presentClassGroup">
-                        <label for="present_class">Present Class *</label>
-                        <select id="present_class" name="present_class" required>
-                            <option value="" disabled selected>Select class</option>
-                            <option value="Nursery">Nursery</option>
-                            <option value="I">I</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                            <option value="VI">VI</option>
-                            <option value="VII">VII</option>
-                            <option value="VIII">VIII</option>
-                            <option value="IX">IX</option>
-                        </select>
-                        <span class="error-message" id="presentClassError"></span>
-                    </div>
+                                if (applyingIdx <= presentIdx) {
+                                    applyingGroup.classList.add('error');
+                                    presentGroup.classList.add('error');
+                                    presentError.textContent = 'Present class must be lower than applying class.';
+                                    applyingError.textContent = 'Applying class must be higher than present class.';
+                                } else {
+                                    applyingGroup.classList.remove('error');
+                                    presentGroup.classList.remove('error');
+                                    presentError.textContent = '';
+                                    applyingError.textContent = '';
+                                }
+                            }
 
-                    <div class="form-group" id="applyingClassGroup">
-                        <label for="appling_for_class">Applying for Class *</label>
-                        <select id="appling_for_class" name="appling_for_class" required>
-                            <option value="" disabled selected>Select class</option>
-                            <option value="Nursery">Nursery</option>
-                            <option value="I">I</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                            <option value="VI">VI</option>
-                            <option value="VII">VII</option>
-                            <option value="VIII">VIII</option>
-                            <option value="IX">IX</option>
-                        </select>
-                        <span class="error-message" id="applyingClassError"></span>
-                    </div>
+                            presentSelect.addEventListener('change', validateClasses);
+                            applyingSelect.addEventListener('change', validateClasses);
 
-                    <div class="form-group full-width">
-                        <label for="full_address">Full Address *</label>
-                        <textarea id="full_address" name="full_address"
-                            placeholder="Enter full address" required></textarea>
-                    </div>
+                            const form = document.getElementById('admissionForm');
+                            form.addEventListener('submit', function (e) {
+                                const presentVal = presentSelect.value;
+                                const applyingVal = applyingSelect.value;
 
-                    <div class="form-group">
-                        <label for="appling_date">Applying Date *</label>
-                        <input type="date" id="appling_date" name="appling_date" required>
-                    </div>
+                                if (presentVal && applyingVal) {
+                                    const presentIdx = getClassIndex(presentVal);
+                                    const applyingIdx = getClassIndex(applyingVal);
 
-                    <div class="form-group">
-                        <label for="residential_status">Residential Status *</label>
-                        <select id="residential_status" name="residential_status" required>
-                            <option value="" disabled selected>Select status</option>
-                            <option value="Residential">Residential</option>
-                            <option value="Non-Residential">Non-Residential</option>
-                            
-                           
-                        </select>
-                    </div>
+                                    if (presentIdx !== -1 && applyingIdx !== -1 && applyingIdx <= presentIdx) {
+                                        applyingGroup.classList.add('error');
+                                        presentGroup.classList.add('error');
+                                        presentError.textContent = 'Present class must be lower than applying class.';
+                                        applyingError.textContent = 'Applying class must be higher than present class.';
 
-                    <!-- ===== SUBMIT ===== -->
-                    <div class="submit-area">
-                        <button type="submit" class="btn-submit">Submit Application</button>
-                    </div>
+                                        applyingGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                </div>
-            </form>
+                                        e.preventDefault();
+                                        return false;
+                                    }
+                                }
+                            });
+                        })();
 
-        </div>
-    </div>
+                        // ----- PHOTO UPLOAD VALIDATION (MAX 500 KB) -----
+                        (function () {
+                            const photoInput = document.getElementById('student_photo');
+                            const photoGroup = document.getElementById('photoUploadGroup');
+                            const photoError = document.getElementById('photoError');
+                            const photoPreview = document.getElementById('photoPreview');
+                            const photoPreviewImg = document.getElementById('photoPreviewImg');
+                            const MAX_SIZE_KB = 500;
+                            const MAX_SIZE_BYTES = MAX_SIZE_KB * 1024;
 
-    <!-- ===== MODAL: HOW TO FILL (YOUTUBE VIDEO) ===== -->
-    <div class="modal-overlay" id="instructionsModal" onclick="closeModalOnOverlay(event, 'instructionsModal')">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>How to Fill the Form</h2>
-                <button type="button" class="modal-close" onclick="closeModal('instructionsModal')"
-                    aria-label="Close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- YouTube Video Embed — Replace the src with your own video URL -->
-                <div class="video-wrapper">
-                    <iframe src="https://youtube.com/shorts/1P_j_Mo3ULk?feature=share"
-                        title="How to Fill the Admission Form"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen loading="lazy">
-                    </iframe>
-                </div>
-                <p class="video-note">
-                    ভর্তি ফর্ম কীভাবে পূরণ করতে হবে, তা ধাপে ধাপে জানতে এই ছোট ভিডিওটি দেখুন।
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" onclick="closeModal('instructionsModal')">Got it</button>
-            </div>
-        </div>
-    </div>
+                            function resetPhotoError() {
+                                photoGroup.classList.remove('error');
+                                photoError.textContent = '';
+                            }
 
-    <!-- ===== MODAL: DOCUMENTS REQUIRED ===== -->
-    <div class="modal-overlay" id="documentsModal" onclick="closeModalOnOverlay(event, 'documentsModal')">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h2>Documents Required</h2>
-                <button type="button" class="modal-close" onclick="closeModal('documentsModal')"
-                    aria-label="Close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <ul>
-                   
-                    <li><strong>Recent color photo</strong> — max 500 KB</li>
-                    
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-modal-close" onclick="closeModal('documentsModal')">Got it</button>
-            </div>
-        </div>
-    </div>
+                            function showPhotoError(msg) {
+                                photoGroup.classList.add('error');
+                                photoError.textContent = msg;
+                                photoPreview.classList.remove('show');
+                                photoPreviewImg.src = '';
+                            }
 
-    <script>
-        // ----- MODAL CONTROLS -----
-        function openModal(id) {
-            const modal = document.getElementById(id);
-            if (!modal) return;
-            modal.classList.add('active');
-            document.body.classList.add('modal-open');
-        }
+                            photoInput.addEventListener('change', function () {
+                                resetPhotoError();
 
-        function closeModal(id) {
-            const modal = document.getElementById(id);
-            if (!modal) return;
-            modal.classList.remove('active');
-            if (!document.querySelector('.modal-overlay.active')) {
-                document.body.classList.remove('modal-open');
-            }
-            if (id === 'instructionsModal') {
-                const iframe = modal.querySelector('iframe');
-                if (iframe) {
-                    const src = iframe.src;
-                    iframe.src = src;
-                }
-            }
-        }
+                                const file = this.files[0];
+                                if (!file) {
+                                    photoPreview.classList.remove('show');
+                                    photoPreviewImg.src = '';
+                                    return;
+                                }
 
-        function closeModalOnOverlay(event, id) {
-            if (event.target.id === id) {
-                closeModal(id);
-            }
-        }
+                                if (file.size > MAX_SIZE_BYTES) {
+                                    showPhotoError('File size exceeds 500 KB. Please upload a smaller image.');
+                                    this.value = '';
+                                    return;
+                                }
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                const activeModal = document.querySelector('.modal-overlay.active');
-                if (activeModal) {
-                    closeModal(activeModal.id);
-                }
-            }
-        });
+                                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                                if (!validTypes.includes(file.type)) {
+                                    showPhotoError('Please upload a valid image file (JPG, JPEG, or PNG).');
+                                    this.value = '';
+                                    return;
+                                }
 
-        // ----- FORM SETUP -----
-        window.addEventListener('load', function () {
-            const today = new Date().toISOString().split('T')[0];
-            const dobInput = document.getElementById('dob');
-            const applingDate = document.getElementById('appling_date');
+                                const reader = new FileReader();
+                                reader.onload = function (e) {
+                                    photoPreviewImg.src = e.target.result;
+                                    photoPreview.classList.add('show');
+                                };
+                                reader.readAsDataURL(file);
+                            });
 
-            if (dobInput) {
-                dobInput.max = today;
-            }
+                            const form = document.getElementById('admissionForm');
+                            form.addEventListener('submit', function (e) {
+                                const file = photoInput.files[0];
+                                if (!file) {
+                                    return;
+                                }
 
-            if (applingDate && !applingDate.value) {
-                applingDate.value = today;
-            }
-        });
+                                if (file.size > MAX_SIZE_BYTES) {
+                                    showPhotoError('File size exceeds 500 KB. Please upload a smaller image.');
+                                    photoGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    e.preventDefault();
+                                    return false;
+                                }
 
-        // ----- CLASS VALIDATION LOGIC -----
-        (function() {
-            // Ordered list of class levels (index represents level)
-            const classOrder = [
-                'Nursery',
-                'I',
-                'II',
-                'III',
-                'IV',
-                'V',
-                'VI',
-                'VII',
-                'VIII',
-                'IX'
-            ];
-
-            const presentSelect = document.getElementById('present_class');
-            const applyingSelect = document.getElementById('appling_for_class');
-            const presentGroup = document.getElementById('presentClassGroup');
-            const applyingGroup = document.getElementById('applyingClassGroup');
-            const presentError = document.getElementById('presentClassError');
-            const applyingError = document.getElementById('applyingClassError');
-
-            // Helper to get index from value (returns -1 if not found)
-            function getClassIndex(val) {
-                return classOrder.indexOf(val);
-            }
-
-            // Validate both fields and show appropriate errors
-            function validateClasses() {
-                const presentVal = presentSelect.value;
-                const applyingVal = applyingSelect.value;
-
-                // Reset errors first
-                presentGroup.classList.remove('error');
-                applyingGroup.classList.remove('error');
-                presentError.textContent = '';
-                applyingError.textContent = '';
-
-                // Only validate if both have values (non-empty)
-                if (!presentVal || !applyingVal) {
-                    return; // no error if either is empty – native required will handle on submit
-                }
-
-                const presentIdx = getClassIndex(presentVal);
-                const applyingIdx = getClassIndex(applyingVal);
-
-                // Safety: if values aren't in the ordered list (shouldn't happen)
-                if (presentIdx === -1 || applyingIdx === -1) {
-                    return;
-                }
-
-                // Rule 1: Applying class must be higher than present class
-                if (applyingIdx <= presentIdx) {
-                    // Show error on applying class (and optionally on present too)
-                    applyingGroup.classList.add('error');
-                    presentGroup.classList.add('error');
-                    presentError.textContent = 'Present class must be lower than applying class.';
-                    applyingError.textContent = 'Applying class must be higher than present class.';
-                } else {
-                    // All good: clear any error
-                    applyingGroup.classList.remove('error');
-                    presentGroup.classList.remove('error');
-                    presentError.textContent = '';
-                    applyingError.textContent = '';
-                }
-            }
-
-            // Attach event listeners
-            presentSelect.addEventListener('change', validateClasses);
-            applyingSelect.addEventListener('change', validateClasses);
-
-            // Also validate on form submission (prevent if invalid)
-            const form = document.getElementById('admissionForm');
-            form.addEventListener('submit', function(e) {
-                const presentVal = presentSelect.value;
-                const applyingVal = applyingSelect.value;
-
-                // Only run validation if both are selected
-                if (presentVal && applyingVal) {
-                    const presentIdx = getClassIndex(presentVal);
-                    const applyingIdx = getClassIndex(applyingVal);
-
-                    if (presentIdx !== -1 && applyingIdx !== -1 && applyingIdx <= presentIdx) {
-                        // Mark errors and prevent submission
-                        applyingGroup.classList.add('error');
-                        presentGroup.classList.add('error');
-                        presentError.textContent = 'Present class must be lower than applying class.';
-                        applyingError.textContent = 'Applying class must be higher than present class.';
-
-                        applyingGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                        e.preventDefault(); 
-                        return false;
-                    }
-                }
-
-            });
-        })();
-
-        // ----- PHOTO UPLOAD VALIDATION (MAX 500 KB) -----
-        (function() {
-            const photoInput = document.getElementById('student_photo');
-            const photoGroup = document.getElementById('photoUploadGroup');
-            const photoError = document.getElementById('photoError');
-            const photoPreview = document.getElementById('photoPreview');
-            const photoPreviewImg = document.getElementById('photoPreviewImg');
-            const MAX_SIZE_KB = 500;
-            const MAX_SIZE_BYTES = MAX_SIZE_KB * 1024; // 512000 bytes
-
-            function resetPhotoError() {
-                photoGroup.classList.remove('error');
-                photoError.textContent = '';
-            }
-
-            function showPhotoError(msg) {
-                photoGroup.classList.add('error');
-                photoError.textContent = msg;
-                photoPreview.classList.remove('show');
-                photoPreviewImg.src = '';
-            }
-
-            photoInput.addEventListener('change', function() {
-                resetPhotoError();
-
-                const file = this.files[0];
-                if (!file) {
-                    // No file selected – if the field is required, native validation handles it
-                    photoPreview.classList.remove('show');
-                    photoPreviewImg.src = '';
-                    return;
-                }
-
-                // Check file size
-                if (file.size > MAX_SIZE_BYTES) {
-                    showPhotoError('File size exceeds 500 KB. Please upload a smaller image.');
-                    this.value = ''; // Clear the file input
-                    return;
-                }
-
-                // Optional: check file type (accept attribute already filters, but just in case)
-                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                if (!validTypes.includes(file.type)) {
-                    showPhotoError('Please upload a valid image file (JPG, JPEG, or PNG).');
-                    this.value = '';
-                    return;
-                }
-
-                // Valid file: show preview
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    photoPreviewImg.src = e.target.result;
-                    photoPreview.classList.add('show');
-                };
-                reader.readAsDataURL(file);
-            });
-
-            // Also validate on form submission
-            const form = document.getElementById('admissionForm');
-            form.addEventListener('submit', function(e) {
-                const file = photoInput.files[0];
-                if (!file) {
-                    // If required and no file, native validation will catch it
-                    return;
-                }
-
-                if (file.size > MAX_SIZE_BYTES) {
-                    showPhotoError('File size exceeds 500 KB. Please upload a smaller image.');
-                    photoGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    e.preventDefault();
-                    return false;
-                }
-
-                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                if (!validTypes.includes(file.type)) {
-                    showPhotoError('Please upload a valid image file (JPG, JPEG, or PNG).');
-                    photoGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    e.preventDefault();
-                    return false;
-                }
-            });
-        })();
-    </script>
+                                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                                if (!validTypes.includes(file.type)) {
+                                    showPhotoError('Please upload a valid image file (JPG, JPEG, or PNG).');
+                                    photoGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    e.preventDefault();
+                                    return false;
+                                }
+                            });
+                        })();
+                    </script>
 
 </body>
 

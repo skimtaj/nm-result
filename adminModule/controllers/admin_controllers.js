@@ -5506,10 +5506,11 @@ const onlineAdmissionFormPost = async (req, res) => {
             onlineAdmissionData.student_photo = req.file.filename;
         }
 
+        let formNo = 1050;
+
         const formNoGenerate = async () => {
-            const formNo = 1050;
-            const incrementFormNo = formNo + 1
-            return `${incrementFormNo}`
+            formNo = formNo + 1;
+            return `${formNo}`;
         };
 
         onlineAdmissionData.form_no = await formNoGenerate();
@@ -5525,9 +5526,9 @@ const onlineAdmissionFormPost = async (req, res) => {
 
     catch (err) {
 
-        console.log('online admission form submitting error', err);
-        req.flash('error', 'Something is wrong');
-        return res.redirect('/nm/online-admission-form-2027')
+        console.log(err);
+        req.flash('error', err.message);
+        return res.redirect('/apply-online')
     }
 
 }

@@ -10,8 +10,6 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-const cluster = require("cluster");
-const os = require("os");
 
 app.use(cookieParser())
 
@@ -42,36 +40,17 @@ app.use('', require('./adminModule/routes/admin_routes'));
 
 
 
-const numCPUs = os.cpus().length;
 
-if (cluster.isPrimary) {
 
-  console.log(`Master ${process.pid}`);
+const PORT = process.env.PORT || 3000;
 
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+app.listen(PORT, () => {
 
-  cluster.on("exit", (worker) => {
+  console.log('Server is connected');
 
-    console.log(`Worker ${worker.process.pid} died`);
+});
 
-    // Restart the worker
-    cluster.fork();
 
-  });
-
-} else {
-
-  const PORT = process.env.PORT || 3000;
-
-  app.listen(PORT, () => {
-
-    console.log(`Worker ${process.pid} - Server is connected on port ${PORT}`);
-
-  });
-
-}
 
 
 

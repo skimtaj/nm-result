@@ -126,9 +126,9 @@ route.get('/nababiamission/admin-dashboard/download-student-result/XII-G', auth,
 
 
 
-route.get('/nm/online-admission-form-2027', ratelimit, onlineAdmissionForm)
+route.get('/apply-online', onlineAdmissionForm)
 
-route.post('/nm/online-admission-form-2027', upload.single('student_photo'), onlineAdmissionFormPost)
+route.post('/apply-online', upload.single('student_photo'), onlineAdmissionFormPost)
 
 route.get('/nm/student-admission/:studentid', downloadAdmissionForm)
 
