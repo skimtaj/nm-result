@@ -5494,44 +5494,50 @@ const onlineAdmissionForm = (req, res) => {
     res.render('../adminModule/Views/online_admission_form')
 }
 
+
+
 const onlineAdmissionFormPost = async (req, res) => {
 
     try {
 
         const onlineAdmissionData = req.body;
 
-        console.log(onlineAdmissionData)
+        console.log(onlineAdmissionData);
 
         if (req.file) {
             onlineAdmissionData.student_photo = req.file.filename;
         }
 
-        let formNo = 1050;
+        const formNoGenerateFunction = async () => {
 
-        const formNoGenerate = async () => {
-            formNo = formNo + 1;
-            return `${formNo}`;
+            const countStudents = await student_admission_model.countDocuments();
+
+            return String(countStudents + 1051);
         };
 
-        onlineAdmissionData.form_no = await formNoGenerate();
+        onlineAdmissionData.form_no = await formNoGenerateFunction();
 
 
-        const new_student_admission_model = student_admission_model(onlineAdmissionData);
+
+        const new_student_admission_model =
+            student_admission_model(onlineAdmissionData);
+
         await new_student_admission_model.save();
 
         req.flash('success', 'Form submitted successfully');
-        return res.redirect(`/nm/student-admission/${new_student_admission_model._id}`)
 
-    }
+        return res.redirect(
+            `/nm/student-admission/${new_student_admission_model._id}`
+        );
 
-    catch (err) {
+    } catch (err) {
 
         console.log(err);
         req.flash('error', err.message);
-        return res.redirect('/apply-online')
-    }
 
-}
+        return res.redirect('/apply-online');
+    }
+};
 
 const downloadAdmissionForm = async (req, res) => {
 
